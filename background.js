@@ -10,21 +10,7 @@ chrome.action.onClicked.addListener(tab => {
         target: { tabId: tab.id },
         args: [isLocked],
         function: (isLocked) => {
-          if (isLocked) {
-            if (!window.$$lockTabListener) {
-              window.$$lockTabListener = (event) => {
-                event.preventDefault();
-                return event.returnValue = "[LockTab] Are you sure you want to exit?";
-              };
-
-              window.addEventListener("beforeunload", window.$$lockTabListener);
-            }
-          } else {
-            if (window.$$lockTabListener) {
-              window.removeEventListener("beforeunload", window.$$lockTabListener);
-              delete window.$$lockTabListener;
-            }
-          }
+          window.$$lockTabIsLocked = isLocked;
         },
       });
 

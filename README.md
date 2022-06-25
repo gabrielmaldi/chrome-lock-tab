@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to chrome-lock-tab 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.2.0-blue.svg?cacheSeconds=2592000" />
   <a href="http://www.wtfpl.net/about/" target="_blank">
     <img alt="License: WTFPL" src="https://img.shields.io/badge/License-WTFPL-yellow.svg" />
   </a>
@@ -25,7 +25,7 @@ Pin the extension and then click to toggle.
 
 👤 **Gabriel Monteagudo**
 
-* Website: https://booster.software
+* Website: https://booster.software 🚂
 * Twitter: [@gabrielmaldi](https://twitter.com/gabrielmaldi)
 * Github: [@gabrielmaldi](https://github.com/gabrielmaldi)
 * LinkedIn: [@gabrielmaldi](https://linkedin.com/in/gabrielmaldi)

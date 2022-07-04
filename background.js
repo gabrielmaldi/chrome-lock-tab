@@ -5,16 +5,12 @@ chrome.action.onClicked.addListener(tab => {
     isLocked = !isLocked;
 
     chrome.storage.local.set({ [key]: isLocked }, async () => {
-      await chrome.scripting.executeScript({
-        injectImmediately: true,
-        target: { tabId: tab.id },
-        args: [isLocked],
-        function: (isLocked) => {
-          window.$$lockTabIsLocked = isLocked;
-        },
+      await chrome.tabs.sendMessage(tab.id, {
+        message: "setIsLocked",
+        value: isLocked,
       });
 
-      chrome.action.setIcon({
+      await chrome.action.setIcon({
         tabId: tab.id,
         path: `images/${isLocked ? "locked" : "unlocked"}.png`,
       });

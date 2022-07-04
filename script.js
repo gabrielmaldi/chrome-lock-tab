@@ -1,6 +1,18 @@
 (function () {
+  let isLocked = false;
+
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    switch (request.message) {
+      case "setIsLocked":
+        isLocked = request.value;
+        break;
+    }
+
+    sendResponse();
+  });
+
   window.addEventListener("beforeunload", function (event) {
-    if (!window.$$lockTabIsLocked) {
+    if (!isLocked) {
       return;
     }
 

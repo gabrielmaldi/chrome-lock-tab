@@ -1,6 +1,8 @@
 (function () {
   const titlePrefix = "🔒 ";
+  const minLoadTimeMillis = 500;
 
+  let loadedTime = Date.now();
   let isLocked = false;
   let titleObserver = null;
 
@@ -8,7 +10,16 @@
     switch (request.message) {
       case "setIsLocked":
         isLocked = request.value;
-        setTitle();
+
+        // Some pages like Google Meet change their title on load, which can result in visual
+        // weirdness if we also try to change it too early, so we wait a bit to avoid this.
+        if (Date.now() - loadedTime < minLoadTimeMillis) {
+          setTimeout(() => {
+            setTitle();
+          }, minLoadTimeMillis);
+        } else {
+          setTitle();
+        }
 
         break;
     }
@@ -16,18 +27,26 @@
     sendResponse();
   });
 
-  window.addEventListener("beforeunload", (event) => {
-    if (!isLocked) {
-      return;
-    }
+  chrome.runtime.sendMessage({
+    message: "initAutoLock",
+  });
 
-    event.preventDefault();
-    event.stopPropagation();
-    event.stopImmediatePropagation();
+  window.addEventListener(
+    "beforeunload",
+    (event) => {
+      if (!isLocked) {
+        return;
+      }
 
-    event.returnValue = "[LockTab] Are you sure you want to exit?";
-    return event.returnValue;
-  }, true);
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+
+      event.returnValue = "[LockTab] Are you sure you want to exit?";
+      return event.returnValue;
+    },
+    true
+  );
 
   function setTitle() {
     if (isLocked) {

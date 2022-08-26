@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lock Tab Options</title>
+
+    <link href="../lib/bootstrap.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="container p-4">
+    <h1>Lock Tab Options</h1>
+
+    <form>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="rules-enable" class="form-label">Auto-lock tabs with these URLs:</label>
+
+            <textarea
+              id="rules-enable"
+              class="form-control"
+              rows="8"
+              placeholder="# Write one rule per line:
+
+# Auto-lock Google Meet
+meet.google.com
+
+# Auto-lock Microsoft Teams calls by this organizer using a regular expression
+teams.microsoft.com/l/meetup-join*\?*organizerId=12345678
+              "
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="rules-disable" class="form-label">Do not auto-lock tabs with these URLs:</label>
+
+            <textarea
+              id="rules-disable"
+              class="form-control"
+              rows="8"
+              placeholder="# Write one rule per line:
+
+# Do not auto-lock Google Search
+google.com/search
+
+# Do not auto-lock this specific Google Meet
+meet.google.com/abc-defg-hij
+              "
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button id="save" type="button" class="btn btn-primary mt-3">Save</button>
+
+      <div id="save-success" style="display: none">
+        <div class="alert alert-success d-inline-block mt-3" role="alert">Options saved.</div>
+      </div>
+    </form>
+
+    <script src="options.js"></script>
+  </body>
+</html>

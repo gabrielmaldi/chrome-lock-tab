@@ -1,7 +1,7 @@
 {
   "name": "Lock Tab",
   "description": "Prevents a tab from being closed accidentally",
-  "version": "1.0.0",
+  "version": "1.1.0",
 
   "author": "gabrielmaldi",
   "homepage_url": "https://github.com/gabrielmaldi/chrome-lock-tab",
@@ -12,7 +12,7 @@
     "storage"
   ],
   "icons": {
-    "128": "images/unlocked.png"
+    "128": "images/unlocked-light.png"
   },
   "background": {
     "service_worker": "src/background.js"

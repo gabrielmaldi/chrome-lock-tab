@@ -9,7 +9,7 @@
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.message) {
       case "setIsLocked":
-        isLocked = request.value;
+        isLocked = request.data.isLocked;
 
         // Some pages like Google Meet change their title on load, which can result in visual
         // weirdness if we also try to change it too early, so we wait a bit to avoid this.
@@ -28,7 +28,10 @@
   });
 
   chrome.runtime.sendMessage({
-    message: "initAutoLock",
+    message: "init",
+    data: {
+      colorScheme: window.matchMedia?.("(prefers-color-scheme: dark)")?.matches ? "dark" : "light",
+    },
   });
 
   window.addEventListener(

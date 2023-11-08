@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+
     <title>Lock Tab Options</title>
 
     <link href="../lib/bootstrap.min.css" rel="stylesheet" />
@@ -10,6 +12,15 @@
     <h1>Lock Tab Options</h1>
 
     <form>
+      <div class="row my-4">
+        <div class="col">
+          <div class="form-group">
+            <input id="show-tab-icon" type="checkbox" class="form-check-input" />
+            <label for="show-tab-icon" class="form-check-label">Add 🔒 to locked tabs</label>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col">
           <div class="form-group">
@@ -52,10 +63,10 @@ meet.google.com/abc-defg-hij
         </div>
       </div>
 
-      <button id="save" type="button" class="btn btn-primary mt-3">Save</button>
+      <button id="save" type="button" class="btn btn-primary mt-4">Save</button>
 
       <div id="save-success" style="display: none">
-        <div class="alert alert-success d-inline-block mt-3" role="alert">Options saved.</div>
+        <div class="alert alert-success d-inline-block mt-4" role="alert">Options saved.</div>
       </div>
     </form>
 

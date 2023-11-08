@@ -15,10 +15,10 @@
         // weirdness if we also try to change it too early, so we wait a bit to avoid this.
         if (Date.now() - loadedTime < minLoadTimeMillis) {
           setTimeout(() => {
-            setTitle();
+            setTitle(request.data.showTabIcon);
           }, minLoadTimeMillis);
         } else {
-          setTitle();
+          setTitle(request.data.showTabIcon);
         }
 
         break;
@@ -51,8 +51,12 @@
     true
   );
 
-  function setTitle() {
+  function setTitle(showTabIcon) {
     if (isLocked) {
+      if (!showTabIcon) {
+        return;
+      }
+
       if (!document.title.startsWith(titlePrefix)) {
         document.title = titlePrefix + document.title;
       }

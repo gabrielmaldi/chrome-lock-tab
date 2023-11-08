@@ -2,7 +2,9 @@ chrome.action.onClicked.addListener((tab) => {
   let key = `tab_${tab.id}`;
 
   chrome.storage.local.get(key, ({ [key]: isLocked }) => {
-    setIsLocked(tab, !isLocked);
+    chrome.storage.sync.get("options", ({ options = {} }) => {
+      setIsLocked(tab, !isLocked, options.showTabIcon);
+    });
   });
 });
 
@@ -17,7 +19,7 @@ chrome.runtime.onMessage.addListener((request, sender) => {
 
 let currentColorScheme = "light";
 
-function setIsLocked(tab, isLocked) {
+function setIsLocked(tab, isLocked, showTabIcon) {
   let key = `tab_${tab.id}`;
 
   chrome.storage.local.set({ [key]: isLocked }, async () => {
@@ -25,6 +27,7 @@ function setIsLocked(tab, isLocked) {
       message: "setIsLocked",
       data: {
         isLocked: isLocked,
+        showTabIcon: showTabIcon === undefined ? true : !!showTabIcon,
       },
     });
 
@@ -54,7 +57,7 @@ function init(tab, data) {
 
     let rulesEnable = parseRules(options.rulesEnable);
     if (rulesEnable.some((rule) => new RegExp(rule, "i").test(tab.url))) {
-      setIsLocked(tab, true);
+      setIsLocked(tab, true, options.showTabIcon);
     }
   });
 }

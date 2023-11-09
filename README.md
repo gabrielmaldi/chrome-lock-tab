@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to chrome-lock-tab 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.2.0-blue.svg?cacheSeconds=2592000" />
   <a href="http://www.wtfpl.net/about/" target="_blank">
     <img alt="License: WTFPL" src="https://img.shields.io/badge/License-WTFPL-yellow.svg" />
   </a>
@@ -36,7 +36,7 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2022 [gabrielmaldi](https://github.com/gabrielmaldi).<br />
+Copyright © 2023 [gabrielmaldi](https://github.com/gabrielmaldi).<br />
 This project is [WTFPL](http://www.wtfpl.net/about/) licensed.
 
 ***

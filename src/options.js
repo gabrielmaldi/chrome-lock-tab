@@ -1,4 +1,9 @@
 (function () {
+  function updateTheme() {
+    let colorMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.querySelector("html").setAttribute("data-bs-theme", colorMode);
+  }
+
   function restoreOptions() {
     chrome.storage.sync.get("options", ({ options = {} }) => {
       document.getElementById("show-tab-icon").checked = options.showTabIcon === undefined ? true : !!options.showTabIcon;
@@ -24,6 +29,9 @@
       }, 3000);
     });
   }
+
+  updateTheme();
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateTheme);
 
   document.addEventListener("DOMContentLoaded", restoreOptions);
   document.getElementById("save").addEventListener("click", saveOptions);

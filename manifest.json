@@ -1,7 +1,7 @@
 {
   "name": "Lock Tab",
   "description": "Prevents a tab from being closed accidentally",
-  "version": "1.2.0",
+  "version": "1.2.1",
 
   "author": "gabrielmaldi",
   "homepage_url": "https://github.com/gabrielmaldi/chrome-lock-tab",

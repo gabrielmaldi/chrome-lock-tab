@@ -1,5 +1,5 @@
 (function () {
-  const titlePrefix = "🔒 ";
+  const titlePrefix = "🔒\u200E ";
   const minLoadTimeMillis = 500;
 
   let loadedTime = Date.now();
@@ -58,15 +58,15 @@
       }
 
       if (!document.title.startsWith(titlePrefix)) {
-        document.title = titlePrefix + document.title;
+        document.title = titlePrefix + document.title.replace(titlePrefix, "");
       }
 
-      if (!titleObserver) {
+      if (!titleObserver && typeof MutationObserver !== "undefined") {
         let titleElement = document.querySelector("head > title");
         if (titleElement) {
           titleObserver = new MutationObserver((mutations) => {
             if (!document.title.startsWith(titlePrefix)) {
-              document.title = titlePrefix + document.title;
+              document.title = titlePrefix + document.title.replace(titlePrefix, "");
             }
           });
 
@@ -77,8 +77,8 @@
         }
       }
     } else {
-      if (document.title.startsWith(titlePrefix)) {
-        document.title = document.title.substring(titlePrefix.length);
+      if (document.title.includes(titlePrefix)) {
+        document.title = document.title.replace(titlePrefix, "");
       }
 
       if (titleObserver) {

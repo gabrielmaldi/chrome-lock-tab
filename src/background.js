@@ -17,6 +17,16 @@ chrome.runtime.onMessage.addListener((request, sender) => {
   }
 });
 
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.pinned) {
+    chrome.storage.sync.get("options", ({ options = {} }) => {
+      if (options.autoLockPinnedTabs === undefined || options.autoLockPinnedTabs) {
+        setIsLocked(tab, true, options.showTabIcon);
+      }
+    });
+  }
+});
+
 let currentColorScheme = "light";
 
 function setIsLocked(tab, isLocked, showTabIcon) {
@@ -50,6 +60,11 @@ function init(tab, data) {
   }
 
   chrome.storage.sync.get("options", ({ options = {} }) => {
+    if (tab.pinned && (options.autoLockPinnedTabs === undefined || options.autoLockPinnedTabs)) {
+      setIsLocked(tab, true, options.showTabIcon);
+      return;
+    }
+
     let rulesDisable = parseRules(options.rulesDisable);
     if (rulesDisable.some((rule) => new RegExp(rule, "i").test(tab.url))) {
       return;

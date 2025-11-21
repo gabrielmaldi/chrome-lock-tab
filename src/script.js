@@ -79,6 +79,8 @@
     } else {
       if (document.title.includes(titlePrefix)) {
         document.title = document.title.replace(titlePrefix, "");
+      } else if (document.title.trim() === titlePrefix.trim()) {
+        document.title = "";
       }
 
       if (titleObserver) {
